@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Partials;
 
 use App\Services\CartService;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class CartPreview extends Component
@@ -27,6 +28,7 @@ class CartPreview extends Component
         $this->items = CartService::getItems();
         $this->totalItems = CartService::totalItems();
         $this->totalPrice = CartService::totalPrice();
+
     }
 
     public function addToCart($id)
@@ -40,7 +42,7 @@ class CartPreview extends Component
     {
         CartService::removeFromCart($id);
         //emit event to cart index page to update the view accordingly
-        $this->emitTo('pages.cart.index','cartUpdated');
+        $this->emit('cartUpdated');
         $this->mount();
     }
 

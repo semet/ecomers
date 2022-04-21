@@ -4,7 +4,7 @@
         <span class="count count-2">{{ $totalItems }}</span>
         <span class="text mt-1">
             <span class="sub">Your Cart:</span>
-            $00.00 </span>
+            Rp.{{ $totalPrice }} </span>
     </a>
     <div class="cart">
         <div class="cart__mini">
@@ -16,7 +16,7 @@
                     </div>
                 </li>
                 @if($items !== null)
-                    @foreach($items as $key => $item)
+                    @foreach($items as $item)
                     <li>
                         <div class="cart__item d-flex justify-content-between align-items-center">
                             <div class="cart__inner d-flex">
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="cart__del">
-                                <button  wire:click.prevent="removeItem('{{ $key }}')"><i class="fal fa-times"></i></button>
+                                <button  wire:click.prevent="removeItem('{{ $item['id'] }}')"><i class="fal fa-times"></i></button>
                             </div>
                         </div>
                     </li>

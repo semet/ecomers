@@ -1,57 +1,54 @@
 <div class="col-lg-6">
+    @if($items->isNotEmpty())
     <div class="your-order mb-30 ">
         <h3>Your order</h3>
         <div class="your-order-table table-responsive">
             <table>
                 <thead>
                 <tr>
-                    <th class="product-name">Product</th>
-                    <th class="product-total">Total</th>
+                    <th class="product-name">
+                        <span class="text-uppercase">Product</span>
+                    </th>
+                    <th class="product-total">
+                        <span class="text-uppercase">Total</span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="cart_item">
-                    <td class="product-name">
-                        Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
-                    </td>
-                    <td class="product-total">
-                        <span class="amount">$165.00</span>
-                    </td>
-                </tr>
-                <tr class="cart_item">
-                    <td class="product-name">
-                        Vestibulum dictum magna <strong class="product-quantity"> × 1</strong>
-                    </td>
-                    <td class="product-total">
-                        <span class="amount">$50.00</span>
-                    </td>
-                </tr>
+
+                @foreach($items as $key => $item)
+                    <tr class="cart_item">
+                        <td class="product-name">
+                            {{ $item['name'] }}
+                            <strong class="product-quantity"> × {{ $item['quantity'] }}</strong>
+                        </td>
+                        <td class="product-total">
+                            <span class="amount">Rp.{{ $item['price'] * $item['quantity'] }}</span>
+                        </td>
+                    </tr>
+                @endforeach
+
                 </tbody>
                 <tfoot>
                 <tr class="cart-subtotal">
                     <th>Cart Subtotal</th>
-                    <td><span class="amount">$215.00</span></td>
+                    <td><span class="amount">Rp.{{ $totalPrice }}</span></td>
                 </tr>
                 <tr class="shipping">
                     <th>Shipping</th>
                     <td>
-                        <ul>
-                            <li>
-                                <input type="radio" name="shipping">
-                                <label>
-                                    Flat Rate: <span class="amount">$7.00</span>
-                                </label>
-                            </li>
-                            <li>
-                                <input type="radio" name="shipping">
-                                <label>Free Shipping:</label>
-                            </li>
-                        </ul>
+                        <span class="amount">Rp.{{ $deliveryCost }}</span>
+                    </td>
+                </tr>
+                <tr class="shipping">
+                    <th>Donation</th>
+                    <td>
+                        <span class="amount">Rp.{{ $donation }}</span>
                     </td>
                 </tr>
                 <tr class="order-total">
                     <th>Order Total</th>
-                    <td><strong><span class="amount">$215.00</span></strong>
+                    <td><strong><span class="amount">Rp.{{ $grossAmount }}</span></strong>
                     </td>
                 </tr>
                 </tfoot>
@@ -59,48 +56,78 @@
         </div>
 
         <div class="payment-method">
-            <div class="accordion" id="checkoutAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="checkoutOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
-                            Direct Bank Transfer
-                        </button>
-                    </h2>
-                    <div id="bankOne" class="accordion-collapse collapse show" aria-labelledby="checkoutOne" data-bs-parent="#checkoutAccordion">
-                        <div class="accordion-body">
-                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                        </div>
+            <div class="payment-image text-center my-2">
+                <a href="#"><img src="{{ asset('assets/img/payment/payment.png') }}" alt=""></a>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="order-button-payment mt-20 flex-grow-1">
+                        <button type="submit" class="tp-btn-h1" wire:click.prevent="handlePayment">Complete Payment</button>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="paymentTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#payment" aria-expanded="false" aria-controls="payment">
-                            Cheque Payment
-                        </button>
-                    </h2>
-                    <div id="payment" class="accordion-collapse collapse" aria-labelledby="paymentTwo" data-bs-parent="#checkoutAccordion">
-                        <div class="accordion-body">
-                            <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="paypalThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#paypal" aria-expanded="false" aria-controls="paypal">
-                            PayPal
-                        </button>
-                    </h2>
-                    <div id="paypal" class="accordion-collapse collapse" aria-labelledby="paypalThree" data-bs-parent="#checkoutAccordion">
-                        <div class="accordion-body">
-                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a
-                                PayPal account.</p>
-                        </div>
+                <div class="col-6">
+                    <div class="order-button-payment mt-20 flex-sm-shrink-0">
+                        <button type="submit" class="tp-btn-h1">Cash On Delivery (COD)</button>
                     </div>
                 </div>
             </div>
-            <div class="order-button-payment mt-20">
-                <button type="submit" class="tp-btn-h1">Place order</button>
+
+
+
+            <div class="d-flex">
+                <div class="order-button-payment mt-20">
+                    <button class="tp-btn-h1">Donate</button>
+                </div>
+                <div class="pt-4 ms-4">
+                    <input type="text" class="form-control mt-2" placeholder="Rp." wire:model.debounce.500ms="donation">
+                </div>
             </div>
+            <div class="">
+                <p class="mt-2"><span class="text-danger">*</span>Donasi untuk bantuan sosial bla bla bla</p>
+
+                <div>
+                    <img src="{{ asset('assets/img/partners/act.svg') }}" class="" width="50" alt="">
+{{--                    <img src="{{ asset('assets/img/partners/mri-logo.png') }}" class="" width="45" height="25" alt="">--}}
+                </div>
+            </div>
+
         </div>
     </div>
+    @else
+    <div class="your-order mb-30 ">
+        <h3>No Items</h3>
+    </div>
+    @endif
 </div>
+
+@push('scripts')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+    <script>
+        window.addEventListener('snapTokenGenerated', (event) => {
+            window.snap.pay(event.detail.snapToken, {
+                onSuccess: function(result){
+                    /* You may add your own implementation here */
+                    console.log(result);
+                    @this.saveOrder(result, event.detail.snapToken)
+                    // window.location.href = result.finish_redirect_url
+                },
+                onPending: function(result){
+                    /* You may add your own implementation here */
+                    console.log(result);
+                    @this.saveOrder(result, event.detail.snapToken)
+                    // window.location.href = result.finish_redirect_url
+                },
+                onError: function(result){
+                    /* You may add your own implementation here */
+                    console.log(result);
+                    // window.location.href = result.finish_redirect_url
+                },
+                onClose: function(){
+                    /* You may add your own implementation here */
+                    window.location.reload();
+                }
+            })
+        })
+    </script>
+@endpush

@@ -21,8 +21,8 @@
                     <i class="fal fa-heart"></i>
                 </a>
                 <a href="#" class="icon-box icon-box-1">
-                    <i class="fal fa-layer-group"></i>
-                    <i class="fal fa-layer-group"></i>
+                    <i class="fal fa-shopping-cart"></i>
+                    <i class="fal fa-shopping-cart"></i>
                 </a>
             </div>
         </div>

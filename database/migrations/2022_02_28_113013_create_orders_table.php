@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('snap_token', 36)->nullable();
             $table->string('courier');
             $table->decimal('delivery_cost', 10, 2);
-            $table->uuid('billing_address');
-            $table->uuid('shipping_address')->nullable();// if it is NULL than it is the same as the billing address
+            $table->uuid('billing_address')->nullable();// if it is NULL than it is the same as the billing address
+            $table->uuid('shipping_address');
             $table->integer('discount')->nullable();
             $table->boolean('delivered')->default(0);
             $table->timestamp('delivered_at')->nullable();

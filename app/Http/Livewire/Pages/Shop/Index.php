@@ -54,6 +54,7 @@ class Index extends Component
 
     public function changePriceRange($price)
     {
+        $this->resetPage();
         $this->priceRange = collect();
         $this->priceRange->push($price);
 

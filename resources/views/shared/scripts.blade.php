@@ -16,5 +16,6 @@
 <script src="{{ asset('assets/js/imagesloaded-pkgd.js') }}"></script>
 <script src="{{ asset('assets/js/ajax-form.js') }}"></script>
 <script src="{{ asset('assets/js/ui-slider-range.js') }}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
 @stack('scripts')
