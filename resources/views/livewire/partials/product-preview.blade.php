@@ -88,20 +88,23 @@
                                 </div>
                                 <div class="product__stock mb-20">
                                     <span class="mr-10">Availability :</span>
-                                    <span> {{ $product !== null ? $product->quantity : '' }} in stock</span>
+                                    <span> {{ $product !== null ? $product->amount : '' }} in stock</span>
                                 </div>
                                 <div class="product__modal-form">
                                     <form action="#">
                                         <div class="pro-quan-area d-lg-flex align-items-center">
                                             <div class="product-quantity mr-20 mb-25">
                                                 <div class="cart-plus-minus p-relative">
-                                                    <input type="text" value="1" />
-                                                    <div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>
+                                                    <input type="text" wire:model="quantity" />
+                                                    <button class="dec qtybutton @if($quantity === 0) text-black-50 @endif" wire:click.prevent="decrementItem" @if($quantity === 0) disabled @endif>-</button>
+                                                    <button class="inc qtybutton" wire:click.prevent="incrementItem">+</button>
                                                 </div>
 
                                             </div>
                                             <div class="pro-cart-btn mb-25">
-                                                <button class="cart-btn" type="submit">Add to cart</button>
+                                                <button class="cart-btn" wire:click.prevent="handleAddToCart('{{ $product !== null ? $product->id : '' }}')">
+                                                    Add to cart
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -109,10 +112,8 @@
                                 <div class="product__stock mb-30">
                                     <ul>
                                         <li>
-                                            <a href="#">
-                                                <span class="cat mr-10">Category:</span>
-                                                <span> {{ $product !== null ? $product->category->name : '' }}</span>
-                                            </a>
+                                            <span class="cat mr-10">Category:</span>
+                                            <span> {{ $product !== null ? $product->category->name : '' }}</span>
                                         </li>
                                     </ul>
                                 </div>

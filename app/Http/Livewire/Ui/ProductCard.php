@@ -15,7 +15,7 @@ class ProductCard extends Component
 
     public function addToCart($id)
     {
-       $this->emitTo('partials.cart-preview', 'itemAdded', $id);
+       $this->emitTo('partials.cart-preview', 'itemAdded', $id, 1);
     }
 
     public function handlePreview($product)

@@ -31,9 +31,9 @@ class CartPreview extends Component
 
     }
 
-    public function addToCart($id)
+    public function addToCart($id, $quantity)
     {
-        CartService::addToCart($id);
+        CartService::addToCart($id, $quantity);
 
         $this->mount();
     }
@@ -51,4 +51,5 @@ class CartPreview extends Component
     {
          $this->mount();
     }
+
 }

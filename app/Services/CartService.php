@@ -48,7 +48,7 @@ class CartService
      * @param $id
      * @return void
      */
-    public static function addToCart($id):void
+    public static function addToCart($id, $quantity):void
     {
         $cart = Session::get('cart');
         $product = Product::find($id);
@@ -60,7 +60,7 @@ class CartService
                     'id' => $id,
                     'name' => $product->name,
                     'price' => $product->latest_price,
-                    'quantity' => 1
+                    'quantity' => $quantity
                 ]
             ];
             Session::put('cart', $cart);
@@ -84,7 +84,7 @@ class CartService
                     'id' => $id,
                     'name' => $product->name,
                     'price' => $product->latest_price,
-                    'quantity' => 1
+                    'quantity' => $quantity
                 ];
                 Session::push('cart', $newItem);
             }
