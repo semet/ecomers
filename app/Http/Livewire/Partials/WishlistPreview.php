@@ -11,7 +11,8 @@ class WishlistPreview extends Component
     public int $totalItems;
 
     protected $listeners = [
-        'itemAddedToWishlist' => 'updateWishlist'
+        'itemAddedToWishlist' => 'updateWishlist',
+        'itemRemovedFromWishlist' => 'updateWishlist'
     ];
     public function render()
     {

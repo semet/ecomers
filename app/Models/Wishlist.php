@@ -20,8 +20,8 @@ class Wishlist extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function products(): HasMany
+    public function product(): BelongsTo
     {
-         return $this->hasMany(Product::class);
+         return $this->belongsTo(Product::class);
     }
 }

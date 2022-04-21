@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
             Order\Listeners\SendThankYouEmail::class,
             Order\Listeners\SendNotificationToSeller::class,
             Order\Listeners\SendNotificationToAdmin::class,
+        ],
+        Stock\ProductRunout::class => [
+            
         ]
     ];
 

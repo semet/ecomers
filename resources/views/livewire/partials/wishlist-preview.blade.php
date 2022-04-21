@@ -1,6 +1,6 @@
 <div class="block-wishlist action">
     <a class="icon-link icon-link-2"
-       @auth('customer') href="wishlist" @endauth
+       @auth('customer') href="{{ route('account.wishlist') }}" @endauth
        @guest('customer') href="#" data-bs-toggle="modal" data-bs-target="#loginModal" @endguest
     >
         <i class="flaticon-heart"></i>

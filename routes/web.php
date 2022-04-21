@@ -17,6 +17,8 @@ Route::prefix('account')->group(function () {
             ->name('account.cart');
         Route::get('/checkout', App\Http\Livewire\Pages\Checkout\Index::class)
             ->name('account.checkout');
+        Route::get('/wishlist', App\Http\Livewire\Pages\Wishlist\Index::class)
+            ->name('account.wishlist');
 
     });
 });

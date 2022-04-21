@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Session;
 
 class CartService
 {
+    //TODO:
+    // 1. Compare item availability vs order (if stock not available, then let customer know and send notification to seller)
+    //2. Customize UI if the item is not available and let Customer get notified once the item available
     public function __construct()
     {
 
