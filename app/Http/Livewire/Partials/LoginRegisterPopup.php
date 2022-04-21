@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Partials;
 
 use Livewire\Component;
 
-class LoginPopup extends Component
+class LoginRegisterPopup extends Component
 {
     public function render()
     {
-        return view('livewire.partials.login-popup');
+        return view('livewire.partials.login-register-popup');
     }
 }

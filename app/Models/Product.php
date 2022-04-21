@@ -46,4 +46,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductReview::class);
     }
+
+    public function wishlist(): BelongsTo
+    {
+         return $this->belongsTo(Wishlist::class);
+    }
 }

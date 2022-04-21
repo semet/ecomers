@@ -16,16 +16,12 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active p-3" id="login-tab" role="tabpanel">
-                        <h1>Login</h1>
+                        <livewire:partials.login-popup/>
                     </div>
                     <div class="tab-pane p-3" id="register-tab" role="tabpanel">
-                       <h1>Register</h1>
+                        <livewire:partials.register-popup/>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

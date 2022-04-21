@@ -117,6 +117,10 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="h4">
+                                    <span class="cat mr-10">Store:</span>
+                                    <span class="text-dark"> {{ $product !== null ? ucfirst($product->store->name) : '' }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>

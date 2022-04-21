@@ -39,6 +39,10 @@
         <!-- shop modal start -->
         <livewire:partials.product-preview />
         <!-- shop modal end -->
+
+        <!-- Login modal start -->
+        <livewire:partials.login-register-popup />
+        <!-- Login modal end -->
     </main>
 
     <!-- footer-start -->

@@ -11,7 +11,7 @@
                     <i class="fal fa-eye"></i>
                     <i class="fal fa-eye"></i>
                 </a>
-                <a href="#" class="icon-box icon-box-1">
+                <a href="#" class="icon-box icon-box-1" wire:click.prevent="handleAddToWishlist('{{ $product->id }}')">
                     <i class="fal fa-heart"></i>
                     <i class="fal fa-heart"></i>
                 </a>
@@ -44,3 +44,11 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener('pleaseLogin', () => {
+            $('#loginModal').modal('show')
+        });
+    </script>
+@endpush
