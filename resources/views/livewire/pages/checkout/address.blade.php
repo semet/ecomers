@@ -30,7 +30,7 @@
             <h3>Address</h3>
             <div class="row">
                 <div class="col-md-12">
-                    @if(empty($addressLine))
+                    @if($addresses->isEmpty())
                         <h4>You dint have any address</h4>
                         <p>Please add one</p>
                     @endif
@@ -58,23 +58,26 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="country-select">
-                        <label for="deliveryService">Delivery Service <span class="required">*</span></label>
-                        <select class="form-control" id="deliveryService">
-                            <option value="">Select Delivery Service</option>
+                        <label for="courier">Courier <span class="required">*</span></label>
+                        <select class="form-control" id="courier" wire:model="courierId" @if($addressLine == null) disabled @endif>
+                            <option value="">Select Courier</option>
                             @foreach($couriers as $courier)
-                                <option value="{{ $courier->id }}">{{ $courier->title }}</option>
+                                <option value="{{ $courier->code }}">{{ $courier->title }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="d-flex gap-2">
-                    <div>
-                        <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                        <label class="btn btn-primary" for="btn-check">Single toggle</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                        <label class="btn btn-primary" for="btn-check">Single toggle</label>
+                <div class="col-md-12">
+                    <div class="country-select">
+                        <label for="deliveryService">Select Delivery Service <span class="required">*</span></label>
+                        <select class="form-control" id="deliveryService" wire:model="deliveryServiceId" @if($addressLine == null) disabled @endif>
+                            <option value="">Select Delivery Service</option>
+                            @foreach($deliveryServices as $service)
+                                <option value="{{ $service['service'] }}">
+                                    {{ $service['description'].'( Biaya: '.$service['cost'][0]['value'].'; Estimasi:'.$service['cost'][0]['etd'] .' hari)' }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -91,6 +94,15 @@
         window.addEventListener('newAddressAdded', () => {
             $('#newAddressModal').modal('hide');
             @this.updateComponent()
+        })
+
+        window.addEventListener('notReadyForPayment', () => {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Please complete the address information and shipping',
+                icon: 'error',
+                confirmButtonText: 'Okay'
+            })
         })
     </script>
 @endpush

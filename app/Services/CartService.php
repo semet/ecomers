@@ -17,7 +17,7 @@ class CartService
      */
     public static function getItems(): mixed
     {
-        return Session::get('cart');
+        return collect(Session::get('cart'));
     }
 
     /**
@@ -25,15 +25,11 @@ class CartService
      */
     public static function totalItems(): int
     {
-        $items = collect(self::getItems());
-        if($items->isEmpty())
-        {
-            return 0;
-        }
-        else
-        {
-            return $items->sum('quantity');
-        }
+        $items = self::getItems()->map(function ($value, $key){
+            return $value['quantity'];
+        })->sum();
+
+        return $items;
     }
 
     /**
@@ -41,17 +37,18 @@ class CartService
      */
     public static function totalPrice(): int
     {
-        $items = collect(self::getItems());
-        return $items
-            ->map(fn($item) => $item['price'] * $item['quantity'])
-            ->sum();
+        $items = self::getItems()->map(function ($value, $key){
+            return $value['price'] * $value['quantity'];
+        })->sum();
+
+        return $items;
     }
 
     /**
      * @param $id
      * @return void
      */
-    public static function addToCart($id):void
+    public static function addToCart($id, $quantity):void
     {
         $cart = Session::get('cart');
         $product = Product::find($id);
@@ -59,28 +56,37 @@ class CartService
         if(! $cart)
         {
             $cart = [
-                $id => [
+                [
+                    'id' => $id,
                     'name' => $product->name,
                     'price' => $product->latest_price,
-                    'quantity' => 1
+                    'quantity' => $quantity
                 ]
             ];
             Session::put('cart', $cart);
         }else{
-            if(isset($cart[$id]))
-            {
-                $cart[$id]['quantity']++;
+            $items = collect($cart);
+            $isExitsInCart = $items->contains(function ($value, $key) use ($id){
+                return $value['id'] == $id;
+            });
 
+            if($isExitsInCart){
+                $existingItem = $items->first(function ($value, $key) use($id){
+                   return $value['id'] === $id;
+                });
+                //Retrieve the key of the existing Items
+                $key = array_search($existingItem, $cart);
+                $cart[$key]['quantity']++;
                 Session::put('cart', $cart);
 
             }else{
-                $cart[$id] = [
-                    "name" => $product->name,
+                $newItem = [
+                    'id' => $id,
+                    'name' => $product->name,
                     'price' => $product->latest_price,
-                    "quantity" => 1,
+                    'quantity' => $quantity
                 ];
-                Session::put('cart', $cart);
-
+                Session::push('cart', $newItem);
             }
         }
     }
@@ -88,14 +94,26 @@ class CartService
     public static function incrementItem($id)
     {
         $cart = Session::get('cart');
-        $cart[$id]['quantity']++;
+        $items = collect($cart);
+        $existingItem = $items->first(function ($value, $key) use($id){
+            return $value['id'] === $id;
+        });
+        //Retrieve the key of the existing Items
+        $key = array_search($existingItem, $cart);
+        $cart[$key]['quantity']++;
         Session::put('cart', $cart);
     }
 
     public static function decrementItem($id)
     {
         $cart = Session::get('cart');
-        $cart[$id]['quantity']--;
+        $items = collect($cart);
+        $existingItem = $items->first(function ($value, $key) use($id){
+            return $value['id'] === $id;
+        });
+        //Retrieve the key of the existing Items
+        $key = array_search($existingItem, $cart);
+        $cart[$key]['quantity']--;
         Session::put('cart', $cart);
     }
 
@@ -106,11 +124,17 @@ class CartService
     public static function removeFromCart($id): void
     {
         $cart = Session::get('cart');
-
-        if(isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->put('cart', $cart);
+        $items = collect($cart);
+        $existingItem = $items->first(function ($value, $key) use($id){
+            return $value['id'] === $id;
+        });
+        //Retrieve the key of the existing Items
+        $key = array_search($existingItem, $cart);
+        if(isset($cart[$key])){
+            unset($cart[$key]);
+            Session::put('cart', $cart);
         }
+
     }
 
     /**

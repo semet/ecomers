@@ -1,4 +1,4 @@
-<div class="modal fade" id="productModalId" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="productModalId" tabindex="-1" role="dialog" aria-hidden="true" wire:ignore.self>
     <div class="modal-dialog modal-dialog-centered product__modal" role="document">
         <div class="modal-content">
             <div class="product__modal-wrapper p-relative">
@@ -61,7 +61,11 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="product__modal-content">
-                                <h4><a href="product-details.html">Samsung C49J89: £875, Debenhams Plus</a></h4>
+                                <h4>
+                                    <a href="product-details.html">
+                                        {{ $product !== null ? $product->name : '' }}
+                                    </a>
+                                </h4>
                                 <div class="product__review d-sm-flex">
                                     <div class="rating rating__shop mb-10 mr-30">
                                         <ul>
@@ -77,45 +81,39 @@
                                     </div>
                                 </div>
                                 <div class="product__price">
-                                    <span>$109.00 – $307.00</span>
+                                    <span>Rp. {{ $product !== null ? $product->latest_price : '' }}</span>
                                 </div>
                                 <div class="product__modal-des mt-20 mb-15">
-                                    <ul>
-                                        <li><a href="#"><i class="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
-                                        <li><a href="#"><i class="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.</a></li>
-                                        <li><a href="#"><i class="fas fa-circle"></i> Memory, Storage & SIM: 12GB RAM, 256GB.</a></li>
-                                        <li><a href="#"><i class="fas fa-circle"></i> Androi v10.0 Operating system.</a></li>
-                                    </ul>
+                                    {{ $product !== null ? $product->description : '' }}
                                 </div>
                                 <div class="product__stock mb-20">
                                     <span class="mr-10">Availability :</span>
-                                    <span>1795 in stock</span>
+                                    <span> {{ $product !== null ? $product->amount : '' }} in stock</span>
                                 </div>
                                 <div class="product__modal-form">
                                     <form action="#">
                                         <div class="pro-quan-area d-lg-flex align-items-center">
                                             <div class="product-quantity mr-20 mb-25">
-                                                <div class="cart-plus-minus p-relative"><input type="text" value="1" /></div>
+                                                <div class="cart-plus-minus p-relative">
+                                                    <input type="text" wire:model="quantity" />
+                                                    <button class="dec qtybutton @if($quantity === 0) text-black-50 @endif" wire:click.prevent="decrementItem" @if($quantity === 0) disabled @endif>-</button>
+                                                    <button class="inc qtybutton" wire:click.prevent="incrementItem">+</button>
+                                                </div>
+
                                             </div>
                                             <div class="pro-cart-btn mb-25">
-                                                <button class="cart-btn" type="submit">Add to cart</button>
+                                                <button class="cart-btn" wire:click.prevent="handleAddToCart('{{ $product !== null ? $product->id : '' }}')">
+                                                    Add to cart
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="product__stock mb-30">
                                     <ul>
-                                        <li><a href="#">
-                                                <span class="sku mr-10">SKU:</span>
-                                                <span>Samsung C49J89: £875, Debenhams Plus</span></a>
-                                        </li>
-                                        <li><a href="#">
-                                                <span class="cat mr-10">Categories:</span>
-                                                <span>iPhone, Tablets</span></a>
-                                        </li>
-                                        <li><a href="#">
-                                                <span class="tag mr-10">Tags:</span>
-                                                <span>Smartphone, Tablets</span></a>
+                                        <li>
+                                            <span class="cat mr-10">Category:</span>
+                                            <span> {{ $product !== null ? $product->category->name : '' }}</span>
                                         </li>
                                     </ul>
                                 </div>

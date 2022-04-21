@@ -7,7 +7,7 @@ use Livewire\Component;
 class ProductCard extends Component
 {
     public $product;
-    public $productId;
+
     public function render()
     {
         return view('livewire.ui.product-card');
@@ -15,6 +15,11 @@ class ProductCard extends Component
 
     public function addToCart($id)
     {
-       $this->emitTo('partials.cart-preview', 'itemAdded', $id);
+       $this->emitTo('partials.cart-preview', 'itemAdded', $id, 1);
+    }
+
+    public function handlePreview($product)
+    {
+        $this->emitTo('partials.product-preview', 'showProduct', $product);
     }
 }

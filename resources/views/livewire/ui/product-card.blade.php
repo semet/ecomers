@@ -1,5 +1,4 @@
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-    {{ $productId }}
     <div class="product__item product__item-d">
         <div class="product__thumb fix">
             <div class="product-image w-img">
@@ -8,7 +7,7 @@
                 </a>
             </div>
             <div class="product-action">
-                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId" wire:click="handlePreview('{{ $product->id }}')">
                     <i class="fal fa-eye"></i>
                     <i class="fal fa-eye"></i>
                 </a>
@@ -17,8 +16,8 @@
                     <i class="fal fa-heart"></i>
                 </a>
                 <a href="#" class="icon-box icon-box-1">
-                    <i class="fal fa-layer-group"></i>
-                    <i class="fal fa-layer-group"></i>
+                    <i class="fal fa-shopping-cart"></i>
+                    <i class="fal fa-shopping-cart"></i>
                 </a>
             </div>
         </div>

@@ -38,6 +38,11 @@ class Order extends Model
         return $this->hasMany(OrderProduct::class);
     }
 
+    public function deliveryService(): HasOne
+    {
+         return $this->hasOne(DeliveryService::class);
+    }
+
     // public static function boot() {
     //     parent::boot();
     //     self::deleted(function($order) {

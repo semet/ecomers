@@ -24,7 +24,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($items as $key => $item)
+                            @foreach($items as $item)
                                 <tr >
                                     <td class="product-thumbnail">
                                         <a href="shop-details.html"><img src="{{ asset('assets/img/cart/shop-p-10.jpg') }}" alt=""></a>
@@ -38,15 +38,15 @@
                                     <td class="product-quantity">
                                         <div class="cart-plus-minus">
                                             <input type="text" value="{{ $item['quantity'] }}"/>
-                                            <button class="dec qtybutton" wire:click="decrementItem('{{ $key }}')">-</button>
-                                            <button class="inc qtybutton" wire:click="incrementItem('{{ $key }}')">+</button>
+                                            <button class="dec qtybutton" wire:click="decrementItem('{{ $item['id'] }}')">-</button>
+                                            <button class="inc qtybutton" wire:click="incrementItem('{{ $item['id'] }}')">+</button>
                                         </div>
                                     </td>
                                     <td class="product-subtotal">
                                         <span class="amount">Rp.{{ $item['price'] * $item['quantity'] }}</span>
                                     </td>
                                     <td class="product-remove">
-                                        <button wire:click.prevent="removeItem('{{ $key }}')"><i class="fa fa-times"></i> </button>
+                                        <button wire:click.prevent="removeItem('{{ $item['id'] }}')"><i class="fa fa-times"></i> </button>
                                     </td>
                                 </tr>
                             @endforeach
