@@ -23,8 +23,11 @@ class EventServiceProvider extends ServiceProvider
             Order\Listeners\SendNotificationToSeller::class,
             Order\Listeners\SendNotificationToAdmin::class,
         ],
+        Stock\Events\ProductAlmostRunout::class => [
+            Stock\Listeners\SendLowStockNotification::class,
+        ],
         Stock\Events\ProductRunout::class => [
-            Stock\Listeners\NotifySeller::class,
+            Stock\Listeners\SendRunoutStockNotification::class,
         ],
         Stock\Events\ProductAvailable::class => [
             Stock\Listeners\NotifyCustomer::class,

@@ -79,7 +79,7 @@ class CartService
                 });
                 //Retrieve the key of the existing Items
                 $key = array_search($existingItem, $cart);
-                $cart[$key]['quantity']++;
+                $quantity !== 0 ? $cart[$key]['quantity'] += $quantity : $cart[$key]['quantity']++;
                 Session::put('cart', $cart);
 
             }else{

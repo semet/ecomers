@@ -7,6 +7,8 @@ Route::prefix('shop')->group(function() {
         ->name('shop.category');
     Route::get('/store/{store}', App\Http\Livewire\Pages\Shop\Index::class)
         ->name('shop.category');
+    Route::get('/product/{product:slug}', App\Http\Livewire\Pages\Product\Index::class)
+        ->name('shop.product');
 });
 Route::prefix('account')->group(function () {
     Route::get('/login', App\Http\Livewire\Pages\Login\Index::class)

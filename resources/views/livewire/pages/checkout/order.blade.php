@@ -1,6 +1,6 @@
 <div class="col-lg-6">
     @if($items->isNotEmpty())
-    <div class="your-order mb-30 ">
+    <div class="your-order border-1 rounded-2 shadow-sm mb-30 ">
         <h3>Your order</h3>
         <div class="your-order-table table-responsive">
             <table>
@@ -72,23 +72,22 @@
                     </div>
                 </div>
             </div>
-
-
-
+            <hr>
             <div class="d-flex">
                 <div class="order-button-payment mt-20">
-                    <button class="tp-btn-h1">Donate</button>
+                    <button class="tp-in-btn">Donate</button>
                 </div>
                 <div class="pt-4 ms-4">
-                    <input type="text" class="form-control mt-2" placeholder="Rp." wire:model.debounce.500ms="donation">
+                    <input type="text" class="form-control" placeholder="Rp." wire:model.debounce.500ms="donation">
                 </div>
             </div>
-            <div class="">
-                <p class="mt-2"><span class="text-danger">*</span>Donasi untuk bantuan sosial bla bla bla</p>
-
-                <div>
-                    <img src="{{ asset('assets/img/partners/act.svg') }}" class="" width="50" alt="">
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <img src="{{ asset('assets/img/partners/act.svg') }}" class="" width="90" alt="">
 {{--                    <img src="{{ asset('assets/img/partners/mri-logo.png') }}" class="" width="45" height="25" alt="">--}}
+                </div>
+                <div class="col-md-10">
+                    <p class="mt-3"><span class="text-danger">*</span>Donasi untuk bantuan sosial bersama Origin</p>
                 </div>
             </div>
 

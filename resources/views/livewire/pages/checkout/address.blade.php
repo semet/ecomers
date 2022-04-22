@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-    <div class="card card-body">
+    <div class="card card-body shadow-sm">
         <div class="checkbox-form">
             <h3>Customer Detail</h3>
             <div class="row">
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="card card-body mt-4">
+    <div class="card card-body shadow-sm mt-4">
         <div class="checkbox-form">
             <h3>Address</h3>
             <div class="row">
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="card card-body mt-4">
+    <div class="card card-body shadow-sm mt-4">
         <div class="checkbox-form">
             <h3>Shipping</h3>
             <div class="row">

@@ -15,14 +15,14 @@
                     <i class="fal fa-heart"></i>
                     <i class="fal fa-heart"></i>
                 </a>
-                <a href="#" class="icon-box icon-box-1">
+                <button class="icon-box icon-box-1" wire:click.prevent="addToCart('{{ $product->id }}')">
                     <i class="fal fa-shopping-cart"></i>
                     <i class="fal fa-shopping-cart"></i>
-                </a>
+                </button>
             </div>
         </div>
-        <div class="product__content-3 mt-2">
-            <h6><a href="product-details.html">{{ $product->name }}</a></h6>
+        <div class="product__content-3 mt-2" wire:ignore>
+            <h6><a href="{{ url('/shop/product/'.$product->slug) }}">{{ $product->name }}</a></h6>
             <div class="rating mb-5">
                 <ul>
                     <li><a href="#"><i class="fal fa-star"></i></a></li>

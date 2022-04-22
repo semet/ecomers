@@ -6,7 +6,7 @@ use App\Providers\Stock\Events\ProductRunout;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class NotifySeller
+class SendRunoutStockNotification
 {
     /**
      * Create the event listener.

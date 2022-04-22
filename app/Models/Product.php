@@ -51,4 +51,19 @@ class Product extends Model
     {
          return $this->hasMany(Wishlist::class);
     }
+
+    public function ratings(): HasMany
+    {
+         return $this->hasMany(ProductRating::class);
+    }
+
+    public function getAvarageRatingsAttribute()
+    {
+        $sumRating = $this->ratings()->sum('value');
+        $ratingsCount = $this->ratings()->count();
+
+//        return ($ratingsCount * 5) > 0 ? $sumRating / (($ratingsCount * 5) / 100) : 0;
+        return $ratingsCount > 0 ? round($sumRating / $ratingsCount, 2) : 0;
+    }
+
 }

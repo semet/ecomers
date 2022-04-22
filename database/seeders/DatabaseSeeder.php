@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
 //             SellerSeeder::class,
 //             ProductSeeder::class,
             // ProductImageSeeder::class,
-            // CustomerSeeder::class,
+             //CustomerSeeder::class,
 //             LocationSeeder::class
             // CourierSeeder::class,
-             BillingAddressSeeder::class,
-             ShippingAddressSeeder::class
+             //BillingAddressSeeder::class,
+             //ShippingAddressSeeder::class
          ]);
     }
 }
