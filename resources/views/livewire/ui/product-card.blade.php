@@ -41,6 +41,9 @@
             <button class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100 rounded-3" wire:click.prevent="addToCart('{{ $product->id }}')">
                 Add to Cart
             </button>
+            <button type="button" class="wc-checkout d-flex align-items-center justify-content-center w-100 rounded-3">
+                Start Bargain
+            </button>
         </div>
     </div>
 </div>

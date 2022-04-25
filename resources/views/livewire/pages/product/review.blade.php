@@ -15,19 +15,21 @@
         </div>
         <div class="col-xl-8">
             @if($product->reviews->count() !== 0)
-            <div class="review-des-infod">
-                <div class="review-details-des">
-                    <div class="author-image mr-15">
-                        <a href="#"><img src="{{ asset('assets/img/author/author-sm-1.jpeg') }}" alt=""></a>
-                    </div>
-                    <div class="review-details-content mt-3">
-                        <div class="name-date mb-30">
-                            <h6> admin – <span> May 27, 2021</span></h6>
+                @foreach($product->reviews as $review)
+                    <div class="review-des-infod">
+                        <div class="review-details-des">
+                            <div class="author-image mr-15">
+                                <a href="#"><img src="{{ asset('assets/img/author/author-sm-1.jpeg') }}" alt=""></a>
+                            </div>
+                            <div class="review-details-content mt-3">
+                                <div class="name-date mb-30">
+                                    <h6> admin – <span> May 27, 2021</span></h6>
+                                </div>
+                                <p>{{ $review->review }}</p>
+                            </div>
                         </div>
-                        <p>A light chair, easy to move around the dining table and about the room. Duis aute irure dolor in reprehenderit in <br> voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                     </div>
-                </div>
-            </div>
+                @endforeach
             @else
             <h5 class="text-dark">Be the first to give review to this product and help other to know better</h5>
             @endif
@@ -75,21 +77,14 @@
                     <form action="#">
                         <div class="row">
                             <div class="col-xxl-12">
-                                <textarea placeholder="Your review" class="comment-input comment-textarea"></textarea>
-                            </div>
-                            <div class="col-xxl-12">
-                                <div class="comment-agree d-flex align-items-center mb-25">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            Save my name, email, and website in this browser for the next time I comment.
-                                        </label>
-                                    </div>
-                                </div>
+                                <textarea placeholder="Your review" class="comment-input comment-textarea form-control @error('reviewText') is-invalid @enderror" wire:model="reviewText"></textarea>
+                                @error('reviewText')
+                                <span class="invalid-feedback mb-4">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-xxl-12">
                                 <div class="comment-submit">
-                                    <button type="submit" class="cart-btn">Submit</button>
+                                    <button type="submit" class="cart-btn" wire:click.prevent="handleSubmitReview">Submit review</button>
                                 </div>
                             </div>
                         </div>

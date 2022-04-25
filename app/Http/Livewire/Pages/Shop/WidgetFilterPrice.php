@@ -23,6 +23,6 @@ class WidgetFilterPrice extends Component
     public function filterPrice()
     {
         $priceRange = collect([$this->min, $this->max]);
-        $this->emitTo('pages.shop.index', 'priceRangeChanged', $priceRange);
+        $this->emit('priceRangeChanged', $priceRange);
     }
 }

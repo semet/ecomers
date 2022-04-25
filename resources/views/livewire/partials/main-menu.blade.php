@@ -18,7 +18,7 @@
                     <li><a href="#">Stores <i class="far fa-angle-down"></i></a>
                         <ul class="submenu">
                             @foreach ($stores as $store)
-                                <li><a href="blog.html">{{ $store->name }}</a></li>
+                                <li><a href="{{ url('/shop/store/'.$store->id) }}">{{ $store->name }}</a></li>
                             @endforeach
                         </ul>
                     </li>

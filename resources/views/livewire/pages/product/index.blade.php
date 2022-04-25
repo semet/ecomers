@@ -12,5 +12,7 @@
     <!-- product-details-des-start -->
     <livewire:pages.product.description :product="$product"/>
     <!-- product-details-des-end -->
+    <livewire:pages.product.related-product :product="$product"/>
+    <livewire:pages.home.recomended/>
 </section>
 

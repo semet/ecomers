@@ -12,15 +12,15 @@
                 </div>
             @endif
             <div class="product-action product-action-2">
-                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
+                <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId" wire:click="handlePreview('{{ $product->id }}')">
                     <i class="fal fa-eye"></i>
                     <i class="fal fa-eye"></i>
                 </a>
-                <a href="#" class="icon-box icon-box-1">
+                <a href="#" class="icon-box icon-box-1" wire:click.prevent="handleAddToWishlist('{{ $product->id }}')">
                     <i class="fal fa-heart"></i>
                     <i class="fal fa-heart"></i>
                 </a>
-                <a href="#" class="icon-box icon-box-1">
+                <a href="#" class="icon-box icon-box-1" wire:click.prevent="addToCart('{{ $product->id }}')">
                     <i class="fal fa-shopping-cart"></i>
                     <i class="fal fa-shopping-cart"></i>
                 </a>
@@ -46,6 +46,7 @@
             <button type="button" class="cart-btn-3 product-modal-sidebar-open-btn d-flex align-items-center justify-content-center w-100" wire:click.prevent="addToCart('{{ $product->id }}')">
                 Add to Cart
             </button>
+
         </div>
     </div>
 </div>

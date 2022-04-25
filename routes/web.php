@@ -5,8 +5,8 @@ Route::get('/', App\Http\Livewire\Pages\Home\Index::class)->name('home');
 Route::prefix('shop')->group(function() {
     Route::get('/category/{category:slug}', App\Http\Livewire\Pages\Shop\Index::class)
         ->name('shop.category');
-    Route::get('/store/{store}', App\Http\Livewire\Pages\Shop\Index::class)
-        ->name('shop.category');
+    Route::get('/store/{store}', App\Http\Livewire\Pages\Store\Index::class)
+        ->name('shop.store');
     Route::get('/product/{product:slug}', App\Http\Livewire\Pages\Product\Index::class)
         ->name('shop.product');
 });
