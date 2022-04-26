@@ -6,15 +6,15 @@ use Livewire\Component;
 
 class ProductSort extends Component
 {
-    public $filterTypes;
+    public $sortingType;
 
     public function render()
     {
         return view('livewire.pages.shop.product-sort');
     }
 
-    public function updatedFilterTypes()
+    public function updatedSortingType()
     {
-        $this->emitTo('pages.shop.index', 'filterChanged', $this->filterTypes);
+        $this->emitTo('pages.shop.index', 'sortingTypeChanged', $this->sortingType);
     }
 }

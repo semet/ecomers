@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Pages\Store;
 
 use App\Models\Product;
 use App\Models\Store;
+use App\Services\StoreProductSorting;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,10 +17,13 @@ class Index extends Component
 
     public $priceRange;
 
+    public $sortingType;
+
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [
-        'priceRangeChanged' => 'changePriceRange'
+        'priceRangeChanged' => 'changePriceRange',
+        'sortingTypeChanged' => 'changeSortingType'
     ];
 
     public function render()
@@ -33,23 +38,22 @@ class Index extends Component
     {
         $this->store = $store;
         $this->priceRange = collect();
+        $this->sortingType = null;
     }
 
-    public function getProducts()
+    public function getProducts(): LengthAwarePaginator
     {
-        if($this->priceRange->isEmpty())
+        if($this->sortingType === null)
         {
-            return $this->store
-                ->products()
-                ->latest()
-                ->withCount('reviews')
-                ->paginate(20);
+            return (new StoreProductSorting())->byFeatured($this->store, $this->priceRange);
         }else{
-            return $this->store
-                ->products()
-                ->whereBetween('latest_price', $this->priceRange->flatten())
-                ->withCount('reviews')
-                ->paginate(20);
+            return match ($this->sortingType)
+            {
+                'featured' => (new StoreProductSorting())->byFeatured($this->store, $this->priceRange),
+                'latest' => (new StoreProductSorting())->byLatest($this->store, $this->priceRange),
+                'price-low-to-high' => (new StoreProductSorting())->byPriceLowToHigh($this->store, $this->priceRange),
+                'price-high-to-low' => (new StoreProductSorting())->byPriceHighToLow($this->store, $this->priceRange),
+            };
         }
     }
 
@@ -59,6 +63,13 @@ class Index extends Component
         $this->priceRange = collect();
         $this->priceRange->push($price);
 
+    }
+
+    public function changeSortingType($type)
+    {
+        $this->resetPage();
+        $this->priceRange = collect();
+        $this->sortingType = $type;
     }
 
     public function addToCart($id)

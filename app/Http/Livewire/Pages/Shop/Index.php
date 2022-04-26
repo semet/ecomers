@@ -16,13 +16,13 @@ class Index extends Component
 
     public $category;
     public $priceRange;
-    public $filterType;
+    public $sortingType;
 
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [
         'priceRangeChanged' => 'changePriceRange',
-        'filterChanged' => 'changeFilter'
+        'sortingTypeChanged' => 'changeSortingType'
     ];
 
     public function render()
@@ -37,23 +37,21 @@ class Index extends Component
     {
         $this->category = $category;
         $this->priceRange = collect();
-        $this->filterType = null;
+        $this->sortingType = null;
     }
 
-    public function getProducts()
+    public function getProducts(): LengthAwarePaginator
     {
-        if($this->filterType === null)
+        if($this->sortingType === null)
         {
             return (new ProductFilter())->byFeatured($this->category->id, $this->priceRange);
         }else{
-             $products = match ($this->filterType){
+            return match ($this->sortingType){
                 'featured' => (new ProductFilter())->byFeatured($this->category->id, $this->priceRange),
                 'latest' => (new ProductFilter())->byLatest($this->category->id, $this->priceRange),
                 'price-low-to-high' => (new ProductFilter())->byPriceLowToHigh($this->category->id, $this->priceRange),
                 'price-high-to-low' => (new ProductFilter())->byPriceHighToLow($this->category->id, $this->priceRange),
             };
-
-             return $products;
         }
 
     }
@@ -65,11 +63,11 @@ class Index extends Component
         $this->priceRange->push($price);
     }
 
-    public function changeFilter(string $type): void
+    public function changeSortingType(string $type): void
     {
         $this->resetPage();
         $this->priceRange = collect();
-        $this->filterType = $type;
+        $this->sortingType = $type;
     }
 
     public function addToCart($id)

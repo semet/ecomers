@@ -10,4 +10,6 @@ class Index extends Component
         return view('livewire.pages.home.index')
             ->extends('layouts.app');
     }
+
+
 }

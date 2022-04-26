@@ -14,7 +14,8 @@ Route::prefix('account')->group(function () {
     Route::get('/login', App\Http\Livewire\Pages\Login\Index::class)
         ->name('login');
     Route::middleware(['customer'])->group(function () {
-        Route::get('', App\Http\Livewire\Pages\Customer\Index::class);
+        Route::get('', App\Http\Livewire\Pages\Customer\Index::class)
+            ->name('customer.home');
         Route::get('/cart', App\Http\Livewire\Pages\Cart\Index::class)
             ->name('account.cart');
         Route::get('/checkout', App\Http\Livewire\Pages\Checkout\Index::class)
