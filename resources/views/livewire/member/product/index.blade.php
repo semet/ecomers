@@ -7,7 +7,7 @@
             <div class="row d-flex justify-content-start">
                 <div class="col-sm-6">
                     <div class="input-group">
-                        <input type="text" wire:model.debounce.500ms="keyword" class="form-control" placeholder="Ketik Nama / NIP / NUPTK" aria-label="Ketik Nama / NIP / NUPTK"
+                        <input type="text" wire:model.debounce.500ms="codeNumber" class="form-control" placeholder="Code Number" aria-label="Code Number"
                             aria-describedby="button-addon2">
                         <button class="btn btn-secondary waves-effect waves-light" type="button" id="button-addon2">
                             <i class="fas fa-search"></i>
@@ -15,14 +15,54 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <select wire:model.debounce.500ms="status" class="form-select" aria-label="Default select example">
-                        <option selected value="">Status</option>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                    <select class="form-select" wire:model.debounce.500ms="sortingType" aria-label="Default select example">
+                        <option selected value="">Sort By</option>
+                        <option value="featured">Featured</option>
+                        <option value="top-sell">Top Sale</option>
+                        <option value="price-low-to-height">Price (Low to Height)</option>
+                        <option value="price-height-to-low">Price (Height to Low)</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
                     <button class="btn btn-dark waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#create-admin">New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#CODE</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Availability</th>
+                                    <th>Sold</th>
+                                    <th>@</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <th scope="row">{{ strtoupper($product->code_number) }}</th>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->latest_price }}</td>
+                                        <td>{{ $product->amount }}</td>
+                                        <td>{{ $product->sold }}</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4">
+                        {{ $products->links() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,6 +20,9 @@
                 <a href="{{ route('member.product') }}">All Products</a>
             </li>
             <li>
+                <a href="#">Products On Sale</a>
+            </li>
+            <li>
                 <a href="#">Runout Products</a>
             </li>
             <li>
