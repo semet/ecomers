@@ -17,7 +17,7 @@ class BillingAddressFactory extends Factory
     public function definition()
     {
         return [
-            'customer_id' => '1fc61175-e51f-4fd0-afe8-a9b046456139',
+            'customer_id' => '4fb24c52-4209-47c1-b439-e819d6baa680',
             'province_id' => 22,
             'city_id' => 239,
             'zip_code' => '83581',

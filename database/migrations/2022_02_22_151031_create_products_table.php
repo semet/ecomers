@@ -28,7 +28,10 @@ return new class extends Migration
             $table->string('latest_price');
             $table->integer('amount');
             $table->integer('weight');
-            $table->string('color_family');
+            $table->integer('length')->nullable();
+            $table->integer('width')->nullable();
+            $table->integer('high')->nullable();
+            $table->string('color_family')->nullable();
             $table->integer('view')->nullable();
             $table->integer('like')->nullable();
             $table->integer('sold')->nullable(); //how many sold

@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
 //             LocationSeeder::class
             // CourierSeeder::class,
              //BillingAddressSeeder::class,
-             //ShippingAddressSeeder::class
+             ShippingAddressSeeder::class
          ]);
     }
 }

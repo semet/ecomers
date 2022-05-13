@@ -19,8 +19,8 @@
                         <option selected value="">Sort By</option>
                         <option value="featured">Featured</option>
                         <option value="top-sell">Top Sale</option>
-                        <option value="price-low-to-height">Price (Low to Height)</option>
-                        <option value="price-height-to-low">Price (Height to Low)</option>
+                        <option value="price-low-to-high">Price (Low to High)</option>
+                        <option value="price-high-to-low">Price (High to Low)</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
@@ -54,7 +54,17 @@
                                         <td>{{ $product->latest_price }}</td>
                                         <td>{{ $product->amount }}</td>
                                         <td>{{ $product->sold }}</td>
-                                        <td>@mdo</td>
+                                        <td>
+                                            <a href="{{ url('http://ecomers.test/shop/product/' . $product->slug) }}" class="text-dark" target="_blank">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('member.product.edit', ['product' => $product]) }}" class="text-dark mx-2">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                            <a href="#" class="text-dark">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

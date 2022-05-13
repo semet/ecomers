@@ -11,4 +11,7 @@ Route::middleware('member')->group(function (){
 
     Route::get('/product', App\Http\Livewire\Member\Product\Index::class)
         ->name('member.product');
+
+    Route::get('/product/{product}', App\Http\Livewire\Member\Product\Edit::class)
+        ->name('member.product.edit');
 });

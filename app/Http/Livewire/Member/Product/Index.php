@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Member\Product;
 
+use App\Services\MemberProductSorting;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -46,63 +47,21 @@ class Index extends Component
     {
         if($this->sortingType === null)
         {
-            return Auth::guard('member')
-                        ->user()
-                        ->store
-                        ->products()
-                        ->orderBy('view')
-                        ->orderBy('sold')
-                        ->paginate(20);
+            return (new MemberProductSorting())->byFeatured();
         }else{
             return match($this->sortingType)
             {
-                '' => Auth::guard('member')
-                                    ->user()
-                                    ->store
-                                    ->products()
-                                    ->orderBy('view')
-                                    ->orderBy('sold')
-                                    ->paginate(20),
-
-                'featured' => Auth::guard('member')
-                                    ->user()
-                                    ->store
-                                    ->products()
-                                    ->orderBy('view')
-                                    ->orderBy('sold')
-                                    ->paginate(20),
-
-                'top-sell' => Auth::guard('member')
-                                    ->user()
-                                    ->store
-                                    ->products()
-                                    ->orderByDesc('sold')
-                                    ->paginate(20),
-
-                'price-low-to-height' => Auth::guard('member')
-                                    ->user()
-                                    ->store
-                                    ->products()
-                                    ->orderBy('latest_price')
-                                    ->paginate(20),
-
-                'price-height-to-low' => Auth::guard('member')
-                                    ->user()
-                                    ->store
-                                    ->products()
-                                    ->orderByDesc('latest_price')
-                                    ->paginate(20),
+                '' => (new MemberProductSorting())->byFeatured(),
+                'featured' => (new MemberProductSorting())->byFeatured(),
+                'top-sell' => (new MemberProductSorting())->byTopSell(),
+                'price-low-to-high' => (new MemberProductSorting())->byPriceLowToHigh(),
+                'price-high-to-low' => (new MemberProductSorting())->byPriceHighToLow(),
             };
         }
     }
 
     public function getProductByCodeNumber()
     {
-        return Auth::guard('member')
-                ->user()
-                ->store
-                ->products()
-                ->where('code_number', $this->codeNumber)
-                ->paginate(20);
+        return (new MemberProductSorting())->byCodeNumber($this->codeNumber);
     }
 }

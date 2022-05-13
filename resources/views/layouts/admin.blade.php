@@ -10,6 +10,7 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.ico') }}" />
 
+    @stack('styles')
     <!-- Bootstrap Css -->
     <link href="{{ asset('assets/admin/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -86,6 +87,7 @@
     <script src="{{ asset('assets/admin/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/node-waves/waves.min.js') }}"></script>
+    @stack('scripts')
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
 
     @livewireScripts()

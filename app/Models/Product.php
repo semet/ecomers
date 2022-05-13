@@ -19,8 +19,8 @@ class Product extends Model
     protected $fillable = [
         'category_id', 'artist_id', 'store_id', 'code_number',
         'slug', 'brand', 'name', 'description', 'details', 'old_price',
-        'latest_price', 'amount', 'weight', 'color_family', 'view', 'like',
-        'sold', 'discounted', 'discounted_amount', 'size'
+        'latest_price', 'amount', 'weight', 'length', 'width', 'high',
+        'color_family', 'view', 'like', 'sold', 'discounted', 'discounted_amount', 'size'
     ];
 
     public function category(): BelongsTo

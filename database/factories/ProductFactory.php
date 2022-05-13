@@ -19,6 +19,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         $color = ['black', 'white', 'green', 'yellow', 'red', 'blue'];
+        $size = ['S', 'M', 'L', 'XL', 'XXL'];
         return [
             'category_id' => Category::all()->random()->id,
             'artist_id' => Artist::all()->random()->id,
@@ -29,13 +30,16 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph(),
             'details' => $this->faker->paragraph(25),
             'latest_price' => rand(1234, 5678),
-            'amount' => rand(123, 456),
-            'weight' => rand(1, 2),
+            'amount' => rand(12, 34),
+            'weight' => rand(123, 456),
+            'length' => rand(12, 34),
+            'width' => rand(12, 34),
+            'high' => rand(12, 34),
             'color_family' => Arr::random($color),
             'sold' => rand(123, 456),
             'view' => rand(123, 456),
-            'like' => rand(123, 456)
-
+            'like' => rand(123, 456),
+            'size' => Arr::random($size)
         ];
     }
 }
