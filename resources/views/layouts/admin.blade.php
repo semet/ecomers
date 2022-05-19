@@ -33,7 +33,9 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <!-- Left Menu Start -->
-                    <livewire:partials.admin.sidebar-menu />
+                    @auth('member')
+                        <livewire:partials.member.sidebar-menu />
+                    @endauth
                 </div>
                 <!-- Sidebar -->
             </div>

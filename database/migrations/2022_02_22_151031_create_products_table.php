@@ -38,6 +38,7 @@ return new class extends Migration
             $table->boolean('discounted')->default(0); //is it on discount?
             $table->integer('discounted_amount')->nullable(); // if it is doscounted, how much?
             $table->string('size', 10)->nullable();
+            // $table->boolean('published')->default(0);
             $table->timestamps();
         });
     }

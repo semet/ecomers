@@ -30,7 +30,6 @@
                         @this.set('product.description', editor.getContent());
                     });
                 },
-
             });
 
             const editor2 = tinymce.init({
@@ -41,11 +40,7 @@
                         @this.set('product.details', editor.getContent());
                     });
                 },
-
             });
-
-
-
         });
 
         window.addEventListener('validationErrorDetected', (event) => {

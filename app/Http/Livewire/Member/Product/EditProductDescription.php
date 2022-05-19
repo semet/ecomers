@@ -27,7 +27,7 @@ class EditProductDescription extends Component
 
     public function handleSubmit()
     {
-        if($this->product['description'] === '' || $this->product['details'] === '')
+        if($this->product['description'] === '' || $this->product['description'] === null  || $this->product['details'] === '' || $this->product['details'] === null)
         {
             $this->dispatchBrowserEvent('validationErrorDetected', ['message' => 'Please fill in all fields']);
         }elseif(Str::length($this->product['description']) <= 50 || Str::length($this->product['details']) <= 100){

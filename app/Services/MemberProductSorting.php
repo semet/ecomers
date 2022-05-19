@@ -17,7 +17,7 @@ class MemberProductSorting {
                 ->paginate(20);
     }
 
-    public function byTopSell()
+    public function byTopSell(): LengthAwarePaginator
     {
         return Auth::guard('member')
                 ->user()
@@ -27,7 +27,7 @@ class MemberProductSorting {
                 ->paginate(20);
     }
 
-    public function byPriceLowToHigh()
+    public function byPriceLowToHigh(): LengthAwarePaginator
     {
         return Auth::guard('member')
                 ->user()
@@ -37,7 +37,7 @@ class MemberProductSorting {
                 ->paginate(20);
     }
 
-    public function byPriceHighToLow()
+    public function byPriceHighToLow(): LengthAwarePaginator
     {
         return Auth::guard('member')
                 ->user()
@@ -47,7 +47,7 @@ class MemberProductSorting {
                 ->paginate(20);
     }
 
-    public function byCodeNumber(string $codeNumber)
+    public function byCodeNumber(string $codeNumber): LengthAwarePaginator
     {
         return Auth::guard('member')
                 ->user()
